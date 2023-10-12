@@ -121,9 +121,9 @@ returnToFirstModalButton.addEventListener("click", closeSecondModal);
 
 // Coder une fonction pour le fetch avec delete et une autre pour fetch en post
 
-function deleteWork(workId) {
+async function deleteWork(workId) {
   const token = localStorage.getItem("token"); // Récupérer le jeton d'accès
-  fetch("http://localhost:5678/api/works/" + workId, {
+  const reponse = await fetch("http://localhost:5678/api/works/" + workId, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -141,6 +141,7 @@ function deleteWork(workId) {
 
         //2/Agir sur les figures de la page index et enlever l'element supprimeé depuis le dom
         document.getElementById("figure" + workId).remove();
+
         //3/Eliminer aussi l'element supprimer depuis le dom
         document.getElementById("figureModale" + workId).remove();
       }
@@ -150,6 +151,8 @@ function deleteWork(workId) {
         );
       }
     })
+    
+
     .catch(function (error) {
       console.log("Erreur lors de la suppression : " + error.message);
     });

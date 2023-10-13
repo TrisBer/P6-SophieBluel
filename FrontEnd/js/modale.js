@@ -120,7 +120,6 @@ const returnToFirstModalButton =
 returnToFirstModalButton.addEventListener("click", closeSecondModal);
 
 // Coder une fonction pour le fetch avec delete et une autre pour fetch en post
-
 async function deleteWork(workId) {
   const token = localStorage.getItem("token"); // Récupérer le jeton d'accès
   const reponse = await fetch("http://localhost:5678/api/works/" + workId, {
@@ -292,7 +291,7 @@ document.querySelector(".modal-form").addEventListener("submit", function(e) {
         },
         body: formData,
       }).then((response) =>{// Utiliser l'objet FormData comme corps de la requête
-        if (response.status ==201) {// Si la requête a réussi (code de statut 201 pour "Créé")
+        if (response.ok) {
           alert("Projet ajouté avec succès !");
           return response.json();
         }
@@ -319,10 +318,6 @@ document.querySelector(".modal-form").addEventListener("submit", function(e) {
         alert("Une erreur est survenue lors de l'ajout!");
       });
 
-      
       } 
     
   });
-
-
-

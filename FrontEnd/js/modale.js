@@ -131,7 +131,7 @@ async function deleteWork(workId) {
   })
     .then(function (response) {
       // element supprimer
-      if (response.status == 204) {
+      if (response.ok) {
         // proceder à :
         //1/ mettre à jour le tableau global
         console.log(works);

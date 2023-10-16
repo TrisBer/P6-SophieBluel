@@ -268,7 +268,7 @@ function validateForm() {
 }
 
 // Ajouter un écouteur d'événements au formulaire modal pour la soumission
-document.querySelector(".modal-form").addEventListener("submit", function(e) {
+document.querySelector(".modal-form").addEventListener("submit", async function(e) {
   e.preventDefault();// Empêcher la soumission par défaut du formulaire
   // Si le formulaire n'est pas valide
   if (!validateForm()) {
@@ -282,14 +282,14 @@ document.querySelector(".modal-form").addEventListener("submit", function(e) {
     formData.append("image", file);// Ajouter le fichier image au FormData
     formData.append("category", categoriesInput.value);// Ajouter la catégorie du projet au FormData
       // Effectuer une requête POST vers le serveur local
-      fetch("http://localhost:5678/api/works", {
+      const response = await fetch("http://localhost:5678/api/works", {
         method: "POST",// Utiliser la méthode POST pour envoyer les données
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: formData,
       }).then((response) =>{// Utiliser l'objet FormData comme corps de la requête
-        if (response.status ==201) {// Si la requête a réussi (code de statut 201 pour "Créé")
+        if (response.ok) {// Si la requête a réussi 
           alert("Projet ajouté avec succès !");
           return response.json();
         }
@@ -315,11 +315,5 @@ document.querySelector(".modal-form").addEventListener("submit", function(e) {
         console.log("Erreur lors de la creation : " + error.message);
         alert("Une erreur est survenue lors de l'ajout!");
       });
-
-      
       } 
-    
   });
-
-
-

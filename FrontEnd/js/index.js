@@ -17,6 +17,7 @@ fetch('http://localhost:5678/api/works')
 .then(function(response) {
         // Affichage de la réponse dans la console
         console.log(response);
+        
          // Vérification de la réponse
         if(response.ok) {
           // Si la réponse est OK, la convertir en format JSON

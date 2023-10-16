@@ -16,7 +16,7 @@ loginForm.addEventListener('submit', async (event) => {
     body: JSON.stringify({ email, password })
   });
 
-  if (response.ok) {
+  if (response.status === 200) {
     // Récupérer le jeton d'authentification depuis la réponse de l'API
     const token = await response.json();
     console.log(token) 
